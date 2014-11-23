@@ -1,5 +1,5 @@
 # Angular JS Video Masonry - Video Wall
-This is a video masonry for Youtube with a optional minimal backend. Without the geo-location and socket.io backend it is backend independent.  Keep in mind that this was a side project.
+This is a video masonry for Youtube with an optional minimal backend. Without the geo-location and socket.io functionality it is backend independent.  Keep in mind that this was a side project and is a WIP.
 
 DEMO: http://www.greatvideo.org
 
@@ -22,10 +22,19 @@ DEMO: http://www.greatvideo.org
 - a) not all done the angular way for the sake of speed
 - b) inline style is present but will be removed
 - c) not really using bower.json completely correctly (can be fixed)
+- d) missing a few node dependencies in server/index.js from package.json (will update)
 
 ### Url Structure:
   - Videos: http://www.greatvideo.org/#/video/Qun80b7hV-Y/Things%2520to%2520do%2520in%2520GTA%2520V%2520-%2520Unhungry%2520Unhungry%2520Cargos.html (/video/, video id, video title)
   - Search: http://www.greatvideo.org/#/search/totinos (/search/, keyword)
+
+### Key Files:
+    - scripts/controllers/main.js - where all the magic happens
+    - scripts/services/youtube.js - the youtube service that contacts youtube
+    - scripts/services/socket.js - handles the front-end socket io connections
+    - server/index.js - handles the geo location and socket io backend.
+    - scripts/app.js - the routes of the app
+    - bower_components/angular-masonry/angular-masonry.js - handles the ui directive part of expanding the video etc.
 
 ### Installation:
   - Clone the project
@@ -33,6 +42,9 @@ DEMO: http://www.greatvideo.org
   - In separate terminal window "grunt serve"
   - In app.js, change below the line // Change this to true to run locally vs on a server, to false to run it on production
   - To create a distribution copy, "grunt dist"
+
+### Disclaimer:
+  - Use at your own risk. Not responsible for damages. Bower_component files belong to their respected owners. This is a WIP and not a final product intended to be used on production.
 
 Want to contribute? Thanks!
 
