@@ -3,10 +3,14 @@ This is a video masonry for Youtube with an optional minimal backend. Without th
 
 DEMO: http://www.greatvideo.org
 
+![](https://github.com/dev-dude/Angular-Video-Masonry/blob/master/project-screenshot.png)
+
 ### Functionality:
   - Scroll and it will load more related videos
   - When the system runs out of related videos, it starts seeding itself by getting related videos to the videos already loaded. This will allow it to load related videos until youtube runs out of videos.
   - Click a Video and it will expand to play the video.
+  - Responsive reorganization
+  - Mini video with scroll that restores to original position (like Youtube on Android)
   - Video Search and auto-complete
   - Filters for new, popular, published, and rating
   - Small thumbnail and big thumbnail support
