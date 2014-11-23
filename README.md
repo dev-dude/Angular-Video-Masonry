@@ -10,11 +10,11 @@ DEMO: http://www.greatvideo.org
   - Video Search and auto-complete
   - Filters for new, popular, published, and rating
   - Small thumbnail and big thumbnail support
-  - If a video is not allowed on youtube it auto searches for similar videos
+  - If a video is not allowed on youtube, it auto searches for similar videos
   - Displays videos relevant to the users region (need back-end node component)
   - Works with mobile devices
   - Has socket.io support for chatting and users sharing video status
-  - Has a video stash functionality (sort of working)
+  - Has a video stash functionality (limited functionality)
 
 ### Important Information:
 - Bower components are included in the project. Why? Because I made modifications to speed up masonry, there are specific modifications to angular masonry, and the facebook sharing functionality and some other modules. I will create forks and get these updated
