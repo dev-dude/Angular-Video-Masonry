@@ -1,0 +1,10 @@
+{
+  "name": "jquery-ui",
+  "version": "1.10.4",
+  "main": [
+      "ui/minified/jquery-ui.min.js"
+  ],
+  "dependencies": {
+    "jquery": ">=1.6"
+  }
+}

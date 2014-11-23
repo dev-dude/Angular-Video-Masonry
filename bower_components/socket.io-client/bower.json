@@ -1,0 +1,5 @@
+{
+    "name": "socket.io-client",
+    "version": "1.1.0",
+    "main": "socket.io.js"
+}

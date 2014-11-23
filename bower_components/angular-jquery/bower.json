@@ -1,0 +1,12 @@
+{
+  "name": "angular-jquery",
+  "version": "0.2.1",
+  "main": "/dist/angular-jquery.min.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "angular": "latest",
+    "angular-mocks": "latest",
+    "jquery": "latest"
+  }
+}
