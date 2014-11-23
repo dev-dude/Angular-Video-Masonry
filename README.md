@@ -1,5 +1,5 @@
 # Angular JS Video Masonry - Video Wall
-This is a video masonry for Youtube with an optional minimal backend. Without the geo-location and socket.io functionality it is backend independent.  Keep in mind that this was a side project and is a WIP.
+This is a video masonry for Youtube with an optional minimal backend. Without the geo-location and socket.io functionality it is backend independent.  Keep in mind that this is a side project and is a WIP.
 
 DEMO: http://www.greatvideo.org
 
