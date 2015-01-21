@@ -1,54 +1,24 @@
 <div data-ng-hide="playerReady" data-ng-show="showLoadingFancy" class="loading-indicator"></div>
-<div data-ng-hide="playerReady" data-ng-show="showLoading" class="fixed loading-bar" style="font-size: 13px;position: fixed;top: 0px;right:50%;width: 185px;margin-right:-95px;background: white;padding: 0px 0px 3px 5px;z-index: 1000000;font-weight:bold;">
-    <span><img style="padding-top:5px;position: relative;top: 3px;" src="http://d36k3b01vg7peu.cloudfront.net/gzip/busy.gif"> Loading Please Wait...</span>
+<div data-ng-hide="playerReady" data-ng-show="showLoading" class="fixed loading-bar top">
+    <span><img id="loading-image" src="http://d36k3b01vg7peu.cloudfront.net/gzip/busy.gif"> Loading Please Wait...</span>
 </div>
-<div data-ng-hide="playerReady" data-ng-show="showLoading" class="fixed loading-bar" style="font-size: 13px;position: fixed;bottom: 0px;right: 50%;margin-right:-95px;width: 185px;background: white;padding: 0px 0px 3px 5px;font-weight:bold;z-index: 1000000;">
-    <span><img style="padding-top:5px;position: relative;top: 3px;" src="http://d36k3b01vg7peu.cloudfront.net/gzip/busy.gif"> Loading Please Wait...</span>
+<div data-ng-hide="playerReady" data-ng-show="showLoading" class="fixed loading-bar bottom">
+    <span><img id="loading-image" src="http://d36k3b01vg7peu.cloudfront.net/gzip/busy.gif"> Loading Please Wait...</span>
 </div>
 
-<style>
-    .playBtn {
-        background: url('http://d36k3b01vg7peu.cloudfront.net/gzip/play.png');
-        height: 25px;
-        width: 25px;
-        position: absolute;
-        top: 50%;
-        margin-left:-13px;
-        margin-top:-13px;
-        opacity: 1;
-        background-size: 25px 25px;
-        background-repeat: no-repeat;
-        left: 50%;
-        cursor: pointer;
-    }
-    .img-area:hover + .playBtn {
-        opacity: 1;
-    }
-    .playBtn:hover {
-        opacity: 1;
-        box-shadow: 1px 1px 18px #fff;
-        border-radius: 5px;
-    }
-    .relatedVideosLoading {
-        color: white;
-        margin:0 auto;
-        padding-top:5px;
-        text-align: center;
-    }
-
-</style>
 <script>
     var loadingFirst = document.getElementsByClassName('loading-indicator-first')[0];
     loadingFirst.parentNode.removeChild(loadingFirst);
 </script>
+
 <div id="welcome-banner" class="alert alert-info alert-dismissible" role="alert">
     GreatVideo.org is a <strong>Video Discovery Engine</strong>. Click a Video and it loads related videos. Scroll and it loads videos of interest. Change the thumb size with toggle button below.
 </div>
-<div style="text-align: left;z-index:10000000000;position:absolute;" id="autocompleteEl"></div>
-<div class="header" style="margin-bottom:0px;padding:0px">
+<div  id="autocompleteEl"></div>
+<div class="header">
     <div class="progress active">
-        <div class="progress-bar progress-bar-danger active"  role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: {{currentLoadedPercentage}}%">
-        {{currentLoadedPercentage | number:0 }} %
+        <div class="progress-bar progress-bar-danger active"  role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width:{{currentLoadedPercentage}}%">
+            {{currentLoadedPercentage | number:0 }} %
         </div>
     </div>
     <!--
@@ -58,77 +28,75 @@
     </div>
     -->
     <form ng-submit="searchAction()" >
-        <div style="display:table;width:100%">
-            <div style="display:table-cell;width: 197px;padding-top:1px;vertical-align:top">
+        <div class="search-area">
+            <div class="logo-cell">
                 <a border="0" href="http://www.greatvideo.org/">
-                    <img src="http://d36k3b01vg7peu.cloudfront.net/gzip/avlogo.png" style="margin-top: 5px;margin-left: 10px;margin-right: 4px;width: 86%;max-height:35px;">
+                    <img src="http://d36k3b01vg7peu.cloudfront.net/gzip/avlogo.png" class="logo-img">
                 </a>
             </div>
-            <div style="display:table-cell;width: 32%;">
-                <input style="height: 25px;" id="youtubeSearch" placeholder="Search" type="text" data-ng-model="searchTerm" class="form-control" />
+            <div class="search-area-cell">
+                <input id="youtubeSearch" placeholder="Search" type="text" data-ng-model="searchTerm" class="form-control youtube-search-box" />
             </div>
-            <div style="display:table-cell;vertical-align: top;">
-                <button class="btn btn-primary" style="margin-right: 10px;height: 38px;margin-bottom: 3px;border-radius: 0px 6px 6px 0px;margin-left: 4px;" data-ng-click="searchAction();" id="buttonSearch"  type="button">Go!</button>
+            <div class="button-cell">
+                <button class="btn btn-primary go-button"  data-ng-click="searchAction();" id="buttonSearch"  type="button">Go!</button>
             </div>
-            <div style="display:table-cell;width: 25%;vertical-align:top;color:white;">
+            <div class="open-menu-cell">
                 <i class="fa fa-angle-up expand-menu" data-ng-click="openMenu($event)"></i>
-                <button class="btn btn-success" data-ng-class="{notActive :videoStash.length === 0}" style="margin-right: 10px;height: 31px;font-size: 13px;margin-bottom: 3px;font-size: 12px;width:60%;max-width: 160px;overflow:hidden;float:right;margin-left: 4px;" data-ng-click="loadStashIntoView();" id="buttonSearch"  type="button"> <span data-ng-if="videoStash.length===0"><i class="fa-area fa fa-plus-square"></i> Save Video Playlist</span><span data-ng-if="videoStash.length > 0">{{videoStash.length}} Saved Videos. Load? </span></button>
+                <button class="btn btn-success expand-menu-button" data-ng-class="{notActive :videoStash.length === 0}"  data-ng-click="loadStashIntoView();"  type="button"> <span data-ng-if="videoStash.length===0"><i class="fa-area fa fa-plus-square"></i> Save Video Playlist</span><span data-ng-if="videoStash.length > 0">{{videoStash.length}} Saved Videos. Load? </span></button>
 
             </div>
         </div>
-        <input type="submit" style="display:none;">
+        <input type="submit" class="hidden-submit-for-autocomplete">
     </form>
-    <div style="margin-top: 8px;margin-left: 10px;" class="btn-group btn-group-sm btnSpecial">
+    <div class="btn-group btn-group-sm btnSpecial first-filter-group">
         <button type="button" class="btn btn-default" data-ng-class="{'active':searchType === 'viewCount'}" data-ng-click="setFilter('viewCount')">View Count</button>
         <button type="button" class="btn btn-default" data-ng-class="{'active':searchType === 'relevance'}"  data-ng-click="setFilter('relevance')">Relevance</button>
         <button type="button" class="btn btn-default" data-ng-class="{'active':searchType === 'published'}" data-ng-click="setFilter('published')">Published</button>
         <button type="button" class="btn btn-default" data-ng-class="{'active':searchType === 'rating'}" data-ng-click="setFilter('rating')">Rating</button>
     </div>
-    <div style="margin-top: 8px;margin-right: 10px;float:right" class="btn-group btn-group-sm btnSpecial">
+    <div class="btn-group btn-group-sm btnSpecial thumbnail-group">
         <button type="button" class="btn btn-default" data-ng-class="{'active':bigThumbSize}"  data-ng-click="setThumb('big')">Big Thumbs</button>
         <button type="button" class="btn btn-default" data-ng-class="{'active':!bigThumbSize}" data-ng-click="setThumb('small')">Small Thumbs (High CPU)</button>
     </div>
 </div>
 
 
-
-        <!--
+<!--
 <button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>
 <button type="button" data-toggle="modal" data-target="#myModal">Launch modal</button>
 -->
 
-<div data-ng-if="showChatArea1" id="showChatArea1" class="chat-area" style="position: fixed;right: 0px;top: 221px;z-index: 100000;">
+<div data-ng-if="showChatArea1" id="showChatArea1" class="chat-area" >
     <div class="chatHeader">
-        <b style="font-size:16px;color:red">Chat Area</b> - <b class="usersWatching">{{usersInRoom.users.length}} Watching:</b>
+        <b class="chat-header-title">Chat Area</b> - <b class="usersWatching">{{usersInRoom.users.length}} Watching:</b>
     </div>
     <div class="usersInRoom" data-ng-repeat="user in usersInRoom.users">
-        <span class="chatUserInRoom">{{$index + 1}}) User{{user.user| cut:true:3:' '}}<span data-ng-if="currentSocketId === user.user"> <b style="color:red;">(You)</b></span><span data-ng-if="joinedRoom === user.user"> <b style="color: #66CE5B;">(Host)</b></span>&nbsp;</span>
+        <span class="chatUserInRoom">{{$index + 1}}) User{{user.user| cut:true:3:' '}}<span data-ng-if="currentSocketId === user.user"> <b class="chat-area-you">(You)</b></span><span data-ng-if="joinedRoom === user.user"> <b class="host-text">(Host)</b></span>&nbsp;</span>
     </div>
     <form ng-submit="submitChat()" >
         <div class="chatText" data-ng-bind-html="chatText"></div>
         <input id="chatMessageText1" class="userChatSend" placeholder="Please Enter a Chat Message..." type="text" data-ng-model="chatTextSend" />
-        <button class="btn btn-primary btnChatSend" style="margin-right: 10px;height: 38px;margin-bottom: 3px;border-radius: 0px 6px 6px 0px;margin-left: 4px;" data-ng-click="submitChat();" type="button">Send Chat</button>
+        <button class="btn btn-primary btnChatSend" data-ng-click="submitChat();" type="button">Send Chat</button>
     </form>
 </div>
 
 <div class="backdrop-special" data-ng-show="showBackDropSpecial" data-ng-click="hideBackDropSpecial()"></div>
-<div style="padding-left: 20px;position:relative;margin: 5px auto;min-height:700px;overflow:hidden">
+<div class="chat-container">
     <div class="main-video open">
-        <!-- <span data-ng-if="hostDisconnected"  class="hostDisconnected"><b>Host has disconnected! <br> Please click <b style="font-size:16px">CLOSE X</b> above </b></b></span> -->
         <div data-ng-if="showChatArea2" class="chat-area">
             <div class="chatHeader">
-                <b style="font-size:16px;color:red">Chat Area</b> - <b class="usersWatching">{{usersInRoom.users.length}} Watching:</b>
+                <b class="chat-header-title">Chat Area</b> - <b class="usersWatching">{{usersInRoom.users.length}} Watching:</b>
             </div>
             <div class="usersInRoom" data-ng-repeat="user in usersInRoom.users">
-                <span class="chatUserInRoom">{{$index + 1}}) User{{user.user| cut:true:3:' '}}<span data-ng-if="currentSocketId === user.user"> <b style="color:red;">(You)</b></span><span data-ng-if="joinedRoom === user.user"> <b style="color: #66CE5B;">(Host)</b></span>&nbsp;</span>
+                <span class="chatUserInRoom">{{$index + 1}}) User{{user.user| cut:true:3:' '}}<span data-ng-if="currentSocketId === user.user"> <b class="chat-area-you">(You)</b></span><span data-ng-if="joinedRoom === user.user"> <b class="host-text">(Host)</b></span>&nbsp;</span>
             </div>
             <div class="chatText" data-ng-bind-html="chatText"></div>
             <form ng-submit="submitChat()" >
                 <input id="chatMessageText2" class="userChatSend" placeholder="Please Enter a Chat Message..." type="text" data-ng-model="chatTextSend" />
-                <button class="btn btn-primary btnChatSend" style="margin-right: 10px;height: 38px;margin-bottom: 3px;border-radius: 0px 6px 6px 0px;margin-left: 4px;" data-ng-click="submitChat();" type="button">Send Chat</button>
+                <button class="btn btn-primary btnChatSend" data-ng-click="submitChat();" type="button">Send Chat</button>
             </form>
         </div>
-        <div class="closebox" data-ng-click="closeMainBox()">CLOSE  <i style="font-size: 19px;" class="fa fa-times"></i> </div>
+        <div class="closebox" data-ng-click="closeMainBox()">CLOSE  <i class="fa fa-times close-icon"></i> </div>
         <div class="black-top">
             <h2 class="videoTitle">
                 {{singleVideoData.title}}
@@ -143,7 +111,7 @@
                 </div>
             </h2>
             <h2 class="left">
-                <div class="likes" style="float:left;">
+                <div class="likes">
                     <i class="fa fa-heart"></i> {{singleVideoData.likeCount}}
                 </div>
                 <div class="date">
@@ -152,32 +120,32 @@
             </h2>
             <h2 class="right">
                 <div class="addToStash" data-ng-click="addToStash(singleVideoData.id,$event);"><i class="fa-area fa fa-plus-square"></i> <span class="save-video-text">&nbsp;Save Video</span></div>
-                <div style="float:left;position:relative" class="shareBtn" facebook data-name='{{singleVideoData.title}}' data-url='http://www.greatvideo.org/#/video/{{singleVideoData.id}}' data-description=" {{singleVideoData.description}}" data-picture-url='http://i.ytimg.com/vi/{{singleVideoData.id}}/mqdefault.jpg' data-caption='{{singleVideoData.title}}' data-shares='shares'><i class="fa fa-facebook-square"></i> Share</div>
-                <div style="float:left;padding-left:15px" class="stats">
+                <div class="shareBtn" facebook data-name='{{singleVideoData.title}}' data-url='http://www.greatvideo.org/#/video/{{singleVideoData.id}}' data-description=" {{singleVideoData.description}}" data-picture-url='http://i.ytimg.com/vi/{{singleVideoData.id}}/mqdefault.jpg' data-caption='{{singleVideoData.title}}' data-shares='shares'><i class="fa fa-facebook-square"></i> Share</div>
+                <div class="stats">
                     <i class="fa fa-bar-chart-o"></i>
                     {{singleVideoData.viewCount}}
                 </div>
             </h2>
         </div>
-        <div class="information" style="height: 80px;background:none;" data-ng-bind-html="singleVideoData.description" style="background:none;">
+        <div class="information" data-ng-bind-html="singleVideoData.description" >
         </div>
     </div>
     <div class="liveItems" data-ng-class="{'slideDownLiveItems':users}">
-        <h2><b style="font-size: 21px;color: #66CE5B;"><i class="fa fa-play-circle" style="margin-right: 5px;"></i>Playing Now.</b> <b> Click to Join and Chat.  Your Username is: <span style="text-decoration:underline;font-weight:bolder;">User{{currentSocketId| cut:true:3:'.'}}</span></b>&nbsp;&nbsp;<span data-ng-if="joinedRoom" style="color:white">Joined Room: User{{joinedRoom| cut:true:3:' '}}</span>  </h2>
-        <span style="color:white"></span>
+        <h2 class="play-now-header"><i class="fa fa-play-circle circle-margin"></i>Playing Now.</b> <b> Click to Join and Chat.  Your Username is: <span class="your-user-name">User{{currentSocketId| cut:true:3:'.'}}</span>&nbsp;&nbsp;<span data-ng-if="joinedRoom" class="joined-room-text">Joined Room: User{{joinedRoom| cut:true:3:' '}}</span>  </h2>
+        <span class="joined-room-text"></span>
         <br>
-        <div style="font-size: 15px;color: #FFF;" data-ng-if="users.length === 0"> No one else is currently watching videos. Be the first!</div>
-        <div data-ng-repeat="user in users" style="color:white">
+        <div class="no-one-else-watching-text" data-ng-if="users.length === 0"> No one else is currently watching videos. Be the first!</div>
+        <div data-ng-repeat="user in users" class="joined-room-text">
             <div class="smallThumb" data-ng-class="{'you':currentSocketId === user.idx}" data-ng-click="joinRoom(user.idx)">
                 <div class="smallTitle">{{user.title | cut:true:50:' ...'}}</div>
                 <img data-ng-src="http://img.youtube.com/vi/{{user.videoId}}/default.jpg">
-                <div class="smallStatus"><span class="videoStatusSmall">{{user.status}}</span> - {{user.time}}s<br> {{user.pplInRoom}} Users <span style="color: #66CE5B;" data-ng-if="currentSocketId === user.idx"> (You) </span><span data-ng-if="currentSocketId !== user.idx"> User{{user.idx | cut:true:3:' '}}</div>
+                <div class="smallStatus"><span class="videoStatusSmall">{{user.status}}</span> - {{user.time}}s<br> {{user.pplInRoom}} Users <span class="chat-area-you" data-ng-if="currentSocketId === user.idx"> (You) </span><span data-ng-if="currentSocketId !== user.idx"> User{{user.idx | cut:true:3:' '}}</div>
             </div>
         </div><br>
     </div>
-    <h2 style="margin-left: 14px;font-size: 17px;margin-bottom: 8px;">Video Results:</h2>
-    <div style="min-height: 400px;overflow:hidden" masonry class="main-area">
-        <div class="relatedVideosLoading" style="padding: 35px 0 44px 0;height:100px;font-size:14px;clear:both;font-weight:lighter" data-ng-show="!videos"> <img src="http://d36k3b01vg7peu.cloudfront.net/gzip/blackloader.gif" class="loading-icon"> Loading Related Videos Please Wait...
+    <h2 class="video-results-header">Video Results:</h2>
+    <div masonry class="main-area">
+        <div class="relatedVideosLoading" data-ng-show="!videos"> <img src="http://d36k3b01vg7peu.cloudfront.net/gzip/blackloader.gif" class="loading-icon"> Loading Related Videos Please Wait...
         </div>
         <div data-video-id="video.id" data-ng-class="{description: video.description, big: bigThumbSize}"  id="{{video.id}}" data-rating="video.rating" class="masonry-brick thumbnail" data-ng-repeat="video in videos">
             <div data-ng-if="showShare" class="shareBtn" facebook data-name='{{video.title}}' data-url='http://www.greatvideo.org/#/video/{{video.id}}' data-description=" {{video.description}}" data-picture-url='http://i.ytimg.com/vi/{{video.id}}/0.jpg' data-caption='{{video.title}}' data-shares='shares'><i class="fa fa-facebook-square"></i> Share</div>
@@ -193,7 +161,7 @@
             </div>
             <div class="playBtn"></div>
             <div class="video-area hide">
-               <div class="loadingPlayer"><img src="http://d36k3b01vg7peu.cloudfront.net/gzip/blackloader.gif" class="loading-icon">Loading Player Please Wait...</div>
+                <div class="loadingPlayer"><img src="http://d36k3b01vg7peu.cloudfront.net/gzip/blackloader.gif" class="loading-icon">Loading Player Please Wait...</div>
             </div>
             <div data-ng-class="{big: bigThumbSize}" class="black-bottom">
                 <h2 class="left">
