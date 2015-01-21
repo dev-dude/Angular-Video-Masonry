@@ -25,6 +25,7 @@ a:hover {
 }
 
 .main-area {
+  min-height: 400px;overflow:hidden
 }
 
 /* Space out content a bit */
@@ -32,6 +33,7 @@ body {
   padding-top: 20px;
   padding-bottom: 20px;
   background-color: #2f2f2f;
+  height:auto;
   font-family: "Lucida Grande","Lucida Sans Unicode", Tahoma, Sans-Serif;
 }
 
@@ -180,6 +182,7 @@ h2 {
 .likes {
   color: red;
   padding-top: 1px;
+  float:left;
 }
 
 .information {
@@ -192,11 +195,14 @@ h2 {
   font-weight:lighter;
   letter-spacing: 1px;
   overflow-x: hidden;
+  height: 80px;
+  background:none;
 }
 
 .stats {
   float: left;
   color: green;
+  padding-left:15px
 }
 
 #player {
@@ -456,7 +462,49 @@ h2 {
 
 .loading-bar {
   border: 1px solid #000;
+  .top {
+    font-size: 13px;position: fixed;top: 0px;right:50%;width: 185px;margin-right:-95px;background: white;padding: 0px 0px 3px 5px;z-index: 1000000;font-weight:bold;
+  }
+  .bottom {
+    font-size: 13px;position: fixed;bottom: 0px;right: 50%;margin-right:-95px;width: 185px;background: white;padding: 0px 0px 3px 5px;font-weight:bold;z-index: 1000000;
+  }
 }
+
+.loading-image {
+  padding-top:5px;position: relative;top: 3px;
+}
+
+#autocompleteEl{text-align: left;z-index:10000000000;position:absolute;}
+
+.first-filter-group {margin-top: 8px;margin-left: 10px;}
+.thumbnail-group {margin-top: 8px;margin-right: 10px;float:right}
+.chat-header-title {font-size:16px;color:red}
+.youtube-search-box {height: 25px;}
+
+.search-area {display:table;width:100%}
+.logo-cell {display:table-cell;width: 197px;padding-top:1px;vertical-align:top}
+.logo-img {margin-top: 5px;margin-left: 10px;margin-right: 4px;width: 86%;max-height:35px;}
+.search-area-cell {display:table-cell;width: 32%;}
+.button-cell {display:table-cell;vertical-align: top;}
+.open-menu-cell {display:table-cell;width: 25%;vertical-align:top;color:white;}
+.hidden-submit-for-autocomplete {display:none;}
+
+.go-button {margin-right: 10px;height: 38px;margin-bottom: 3px;border-radius: 0px 6px 6px 0px;margin-left: 4px;}
+.expand-menu-button {margin-right: 10px;height: 31px;font-size: 13px;margin-bottom: 3px;font-size: 12px;width:60%;max-width: 160px;overflow:hidden;float:right;margin-left: 4px;}
+
+#showChatArea1{position: fixed;right: 0px;top: 221px;z-index: 100000;}
+.chat-area-you{color:red;}
+.joined-room-text {color:white}
+.host-text {color: #66CE5B;}
+.close-icon {font-size: 19px;}
+
+.play-now-header {font-size: 21px;color: #66CE5B;}
+.circle-margin {margin-right: 5px;}
+
+.your-user-name {text-decoration:underline;font-weight:bolder;}
+.no-one-else-watching-text {font-size: 15px;color: #FFF;}
+
+.video-results-header {margin-left: 14px;font-size: 17px;margin-bottom: 8px;}
 
 .main-video .shareBtn {
   float: left;
@@ -784,12 +832,13 @@ h2 {
 }
 
 .btnChatSend {
-  margin-right: 3px !important;
-  margin-bottom: 3px !important;
-  margin-top: 6px !important;
-  float: right !important;
-  height: 34px !important;
-  border-radius:5px !important;
+  margin-right: 10px;
+  margin-bottom: 3px;
+  margin-left: 4px;
+  margin-top: 6px;
+  float: right;
+  height: 38px;
+  border-radius: 0px 6px 6px 0px;
 }
 
 .main-video .addToStash  {
@@ -877,6 +926,41 @@ h2 {
   transition: 0.5s ease;
 }
 
+.playBtn {
+  background: url('http://d36k3b01vg7peu.cloudfront.net/gzip/play.png');
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  top: 50%;
+  margin-left:-13px;
+  margin-top:-13px;
+  opacity: 1;
+  background-size: 25px 25px;
+  background-repeat: no-repeat;
+  left: 50%;
+  cursor: pointer;
+}
+
+.img-area:hover + .playBtn {
+  opacity: 1;
+}
+
+.playBtn:hover {
+  opacity: 1;
+  box-shadow: 1px 1px 18px #fff;
+  border-radius: 5px;
+}
+
+.relatedVideosLoading {
+  color: white;
+  margin:0 auto;
+  text-align: center;
+  padding: 35px 0 44px 0;
+  height:100px;
+  font-size:14px;
+  clear:both;
+  font-weight:lighter
+}
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
@@ -893,7 +977,7 @@ h2 {
   }
   /* Space out the masthead */
   .header {
-    margin-bottom: 10px;
+    margin-bottom:0px;padding:0px;
   }
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {

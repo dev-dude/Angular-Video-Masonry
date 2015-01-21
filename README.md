@@ -22,11 +22,7 @@ DEMO: http://www.greatvideo.org
 
 ### Important Information:
 - Bower components are included in the project. Why? Because I made modifications to speed up masonry, there are specific modifications to angular masonry, and the facebook sharing functionality and some other modules. I will create forks and get these updated
-- Things in the "side project" are:
-- a) not all done the angular way for the sake of speed
-- b) inline style is present but will be removed
-- c) not really using bower.json completely correctly (can be fixed)
-- d) missing a few node dependencies in server/index.js from package.json (will update)
+- Missing a few node dependencies in server/index.js from package.json (will update)
 
 ### Url Structure:
   - Videos: http://www.greatvideo.org/#/video/Qun80b7hV-Y/Things%2520to%2520do%2520in%2520GTA%2520V%2520-%2520Unhungry%2520Unhungry%2520Cargos.html (/video/, video id, video title)
